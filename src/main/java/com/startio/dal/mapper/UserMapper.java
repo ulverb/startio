@@ -4,11 +4,11 @@ import com.startio.dal.entities.UserEntity;
 import com.startio.dto.UserDto;
 import org.springframework.stereotype.Component;
 
-@Component
-public class UsersMapper {
+public class UserMapper {
 
     public static UserDto convertUserEntityToDto(UserEntity userEntity){
         return UserDto.builder()
+                .userId(userEntity.getId())
                 .username(userEntity.getUsername())
                 .password(userEntity.getPassword())
                 .build();

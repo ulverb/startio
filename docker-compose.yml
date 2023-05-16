@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  data_storage:
+    container_name: data_storage
+    image: 'data_storage:1.0-SNAPSHOT'
+    depends_on:
+      - mysql
+    restart: always
+    ports:
+      - '8080:8080'
+
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    volumes:
+      - "./initDB.sql:/docker-entrypoint-initdb.d/1.sql"
+    restart: always
+    ports:
+      - '5432'
+    environment:
+      MYSQL_ROOT_PASSWORD: #add root password
+      MYSQL_USER: milagro
+      MYSQL_PASSWORD: # add password

@@ -28,24 +28,41 @@ class StartioApplicationTests {
 		assertThat(userController).isNotNull();
 	}
 
+	private static String USERNAME = "USER6";
+	private static String PASSWORD = "PASSWORD6";
+
 	@Test
 	void UserRegistration_POST(){
 
-		UserDto user = new UserDto("User3", "Password3");
+		UserDto user = new UserDto();
+		user.setUsername(USERNAME);
+		user.setPassword(PASSWORD);
+
 		String response = this.restTemplate.postForObject("http://localhost:8080/api/v1.0/account", user , String.class);
 
 		assertThat(response.equals("User Saved !!!"));
-
 	}
 
 	@Test
 	void UserRegistration_GET(){
 
-		String username = "User3";
+		UserDto response = this.restTemplate.getForObject("http://localhost:8080/api/v1.0/account?username="+USERNAME, UserDto.class);
 
-		UserDto response = this.restTemplate.getForObject("http://localhost:8080/api/v1.0/account?username=User3",UserDto.class);
-
-		assertThat(response.getPassword()).isEqualTo("Password3");
-
+		assertThat(response.getPassword()).isEqualTo(PASSWORD);
 	}
+
+	@Test
+	void UserRegistration_PUT(){
+
+		UserDto user = new UserDto();
+		user.setUsername(USERNAME);
+		user.setPassword(PASSWORD);
+
+		this.restTemplate.put("http://localhost:8080/api/v1.0/account", user);
+
+		UserDto response = this.restTemplate.getForObject("http://localhost:8080/api/v1.0/account?username="+USERNAME, UserDto.class);
+
+		assertThat(response.getPassword()).isEqualTo("NEW_" + PASSWORD);
+	}
+
 }

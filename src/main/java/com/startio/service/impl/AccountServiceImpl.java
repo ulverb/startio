@@ -1,9 +1,10 @@
 package com.startio.service.impl;
 
 import com.startio.dal.entities.UserEntity;
-import com.startio.dal.mapper.UsersMapper;
+import com.startio.dal.mapper.UserMapper;
 import com.startio.dto.UserDto;
-import com.startio.repository.UserRepository;
+import com.startio.errors.NotFoundException;
+import com.startio.repository.UsersRepository;
 import com.startio.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,29 +16,26 @@ import java.util.Optional;
 @Service("AccountServiceImpl")
 public class AccountServiceImpl implements AccountService {
 
-    private final UserRepository userRepository;
+    private final UsersRepository userRepository;
 
     @Autowired
-    public AccountServiceImpl(UserRepository userRepository) {
+    public AccountServiceImpl(UsersRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public void createUser(UserDto user) {
-        userRepository.save(UsersMapper.convertUserDtoToEntity(user));
+        userRepository.save(UserMapper.convertUserDtoToEntity(user));
     }
 
     @Override
     public void updateUser(UserDto user) {
 
         Optional<UserEntity> optionalUserEntity = userRepository.findByUsername((user.getUsername()));
-        if(optionalUserEntity.isPresent()){
+        if(optionalUserEntity.isPresent()) {
             UserEntity entity = optionalUserEntity.get();
             entity.setPassword(user.getPassword());
             userRepository.saveAndFlush(entity);
-        }else{
-            //todo User not found handling
-            //throw RuntimeException("user not found");
         }
     }
 
@@ -46,9 +44,8 @@ public class AccountServiceImpl implements AccountService {
 
         Optional<UserEntity> optionalUserEntity = userRepository.findByUsername((username));
         if(optionalUserEntity.isPresent()){
-            return UsersMapper.convertUserEntityToDto(optionalUserEntity.get());
+            return UserMapper.convertUserEntityToDto(optionalUserEntity.get());
         }
-        //todo Error handling;
-        return null;
+        throw new NotFoundException("User not found !");
     }
 }

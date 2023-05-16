@@ -1,20 +1,23 @@
 package com.startio.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(builderClassName = "Builder", toBuilder = true)
-public class UserDto {
+public class CommentDto {
 
-    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Long userId;
-    private String username;
-    private String password;
+    private Long id;
+    private long userId;
+    private String text;
+    private Instant created_at;
+    private Instant updated_at;
+    private Long postId;
 }
