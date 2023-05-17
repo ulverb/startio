@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/v1.0/comments") //("/api/v1.0/posts/{id}/comments")
@@ -30,22 +32,23 @@ public class CommentsController {
 
     }
 
-    @RequestMapping(value = "/post/{id}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getCommentsByPostId(@PathVariable Long postId) {
+    @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CommentDto>> getCommentsByPostId(@PathVariable Long postId) {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.parseMediaType(MediaType.APPLICATION_JSON_VALUE))
                 .body(commentsService.getCommentByPostId(postId));
     }
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getCommentsByUserId(@PathVariable Long userId) {
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CommentDto>> getCommentsByUserId(@PathVariable Long userId) {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.parseMediaType(MediaType.APPLICATION_JSON_VALUE))
                 .body(commentsService.getCommentsByUserId(userId));
     }
+
     @RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity updateComment(@RequestBody CommentDto input){
 
@@ -54,6 +57,6 @@ public class CommentsController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.parseMediaType(MediaType.APPLICATION_JSON_VALUE))
-                .body(new String("Post successfully updated !!!"));
+                .body(new String("Comment successfully updated !!!"));
     }
 }

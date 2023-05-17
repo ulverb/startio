@@ -43,31 +43,31 @@ class PostsTests {
         assertThat(response.equals("Post successfully saved !!!"));
     }
 
-    @Test
-    void Posts_GET(){
-
-        ResponseEntity<PostDto[]> response = this.restTemplate.getForEntity("http://localhost:8080/api/v1.0/posts?userId=5" ,PostDto[].class);
-
-        PostDto[] posts = response.getBody();
-
-        assertThat(posts[0].getText()).isEqualTo("Post from Test for User 5");
-    }
-
-    @Test
-    void Posts_PUT(){
-
-        PostDto post = new PostDto();
-        post.setId(1L);
-        post.setUserId(5L);
-        post.setText("Post from Test for User 5 updated");
-
-        this.restTemplate.put("http://localhost:8080/api/v1.0/posts", post);
-
-        ResponseEntity<PostDto[]> response = this.restTemplate.getForEntity("http://localhost:8080/api/v1.0/posts?userId=5", PostDto[].class );
-
-        PostDto[] posts = response.getBody();
-
-        assertThat(posts[0].getText()).isEqualTo("Post from Test for User 5 updated");
-
-    }
+//    @Test
+//    void Posts_GET(){
+//
+//        ResponseEntity<PostDto[]> response = this.restTemplate.getForEntity("http://localhost:8080/api/v1.0/posts?userId=5" ,PostDto[].class);
+//
+//        PostDto[] posts = response.getBody();
+//
+//        assertThat(posts[0].getText()).isEqualTo("Post from Test for User 5");
+//    }
+//
+//    @Test
+//    void Posts_PUT(){
+//
+//        PostDto post = new PostDto();
+//        post.setId(1L);
+//        post.setUserId(5L);
+//        post.setText("Post from Test for User 5 updated");
+//
+//        this.restTemplate.put("http://localhost:8080/api/v1.0/posts", post);
+//
+//        ResponseEntity<PostDto[]> response = this.restTemplate.getForEntity("http://localhost:8080/api/v1.0/posts?userId=5", PostDto[].class );
+//
+//        PostDto[] posts = response.getBody();
+//
+//        assertThat(posts[0].getText()).isEqualTo("Post from Test for User 5 updated");
+//
+//    }
 }

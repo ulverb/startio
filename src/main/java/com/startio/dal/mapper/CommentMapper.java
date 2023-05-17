@@ -21,7 +21,7 @@ public class CommentMapper {
                 .build();
     }
 
-    public static List<CommentDto> createListCommentDto(List<CommentEntity> commentEntitys) {
-        return commentEntitys.stream().map(CommentMapper::convertCommentEntityToDto).collect(Collectors.toList());
+    public static List<CommentDto> createListCommentDto(List<CommentEntity> commentEntities) {
+        return commentEntities.stream().map(CommentMapper::convertCommentEntityToDto).collect(Collectors.toList());
     }
 }

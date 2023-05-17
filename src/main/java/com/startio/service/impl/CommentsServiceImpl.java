@@ -39,10 +39,10 @@ public class CommentsServiceImpl implements CommentsService {
         Optional<CommentEntity> optionalEntity = commentsRepository.findById(comment.getId());
 
         if(optionalEntity.isPresent()) {
-            CommentEntity entityToUpdata = optionalEntity.get();
-            entityToUpdata.setText(comment.getText());
-            entityToUpdata.setUpdated_at(Instant.now());
-            commentsRepository.saveAndFlush(entityToUpdata);
+            CommentEntity entityToUpdate = optionalEntity.get();
+            entityToUpdate.setText(comment.getText());
+            entityToUpdate.setUpdated_at(Instant.now());
+            commentsRepository.saveAndFlush(entityToUpdate);
         }
     }
 

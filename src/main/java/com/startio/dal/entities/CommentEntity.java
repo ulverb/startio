@@ -12,7 +12,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "posts")
+@Table(name = "comments")
 public class CommentEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

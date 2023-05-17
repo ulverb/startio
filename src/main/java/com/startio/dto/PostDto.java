@@ -15,7 +15,7 @@ import java.time.Instant;
 public class PostDto {
 
     private Long id;
-    private long userId;
+    private Long userId;
     private String text;
     private Instant created_at;
     private Instant updated_at;

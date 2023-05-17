@@ -14,6 +14,6 @@ public interface PostsRepository extends JpaRepository<PostEntity, Long> {
 
     Optional<PostEntity> findById(Long postId);
 
-    @Query("SELECT p FROM PostEntity p WHERE p.id =:userId")
+    @Query("SELECT p FROM PostEntity p WHERE p.userId =:userId")
     List<PostEntity> findByUserId(Long userId);
 }

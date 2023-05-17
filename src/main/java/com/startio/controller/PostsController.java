@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/v1.0/posts")
@@ -31,7 +33,7 @@ public class PostsController{
     }
 
     @RequestMapping(method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getPosts(@RequestParam Long userId) {
+    public ResponseEntity<List<PostDto>> getPosts(@RequestParam Long userId) {
 
         return ResponseEntity
                 .status(HttpStatus.OK)

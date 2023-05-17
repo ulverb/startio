@@ -21,7 +21,7 @@ public class PostMapper {
                 .build();
     }
 
-    public static List<PostDto> createListPostDto(List<PostEntity> postEntitys) {
-        return postEntitys.stream().map(PostMapper::convertPostEntityToDto).collect(Collectors.toList());
+    public static List<PostDto> createListPostDto(List<PostEntity> postEntities) {
+        return postEntities.stream().map(PostMapper::convertPostEntityToDto).collect(Collectors.toList());
     }
 }
