@@ -7,15 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class StartioApplicationTests {
+class UserAccountTests {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -28,8 +25,8 @@ class StartioApplicationTests {
 		assertThat(userController).isNotNull();
 	}
 
-	private static String USERNAME = "USER6";
-	private static String PASSWORD = "PASSWORD6";
+	private static String USERNAME = "USER16";
+	private static String PASSWORD = "PASSWORD11";
 
 	@Test
 	void UserRegistration_POST(){
@@ -56,7 +53,7 @@ class StartioApplicationTests {
 
 		UserDto user = new UserDto();
 		user.setUsername(USERNAME);
-		user.setPassword(PASSWORD);
+		user.setPassword("NEW_" + PASSWORD);
 
 		this.restTemplate.put("http://localhost:8080/api/v1.0/account", user);
 
